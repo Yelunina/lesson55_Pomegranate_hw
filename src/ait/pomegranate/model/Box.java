@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Box implements Iterable<Pomegranate>{
-    String name;
-    List<Pomegranate> granates;
+    private String name;
+    private List<Pomegranate> granates;
 
     public Box(String name) {
         this.name = name;
@@ -30,18 +30,30 @@ public class Box implements Iterable<Pomegranate>{
         return granates.add(granate);
     }
 
+    public double weight() {
+        return granates.stream()
+                .mapToDouble(g -> g.weight())
+                .sum();
+    }
+
     public int quantity() {
         return granates.size();
     }
 
     public int countSeeds() {
         return granates.stream()
-                .map(g -> g.quantity())
-                .reduce(0, (a,b) -> a + b);
+                .mapToInt(g -> g.quantity())
+                .sum();
     }
 
     @Override
     public Iterator<Pomegranate> iterator() {
         return granates.iterator();
     }
+
+    @Override
+    public String toString() {
+        return "Box {name=" + name + ", seeds= " + countSeeds() + "}";
+    }
+
 }

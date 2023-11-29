@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Pomegranate implements Iterable<Seed> {
+public class Pomegranate implements Iterable<Seed>{
     List<Seed> seeds;
 
     public Pomegranate() {
@@ -27,8 +27,15 @@ public class Pomegranate implements Iterable<Seed> {
         return seeds.size();
     }
 
+    public double weight() {
+        return seeds.stream()
+                .mapToDouble(s -> s.getWeight())
+                .sum();
+    }
+
     @Override
     public Iterator<Seed> iterator() {
         return seeds.iterator();
     }
+
 }
